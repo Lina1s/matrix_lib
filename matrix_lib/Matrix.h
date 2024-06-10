@@ -20,7 +20,7 @@ public:
     std::vector<double> &operator[](int x);
     const std::vector<double> &operator[](int x) const;
     [[nodiscard]] size_t rows() const;
-    size_t columns() const;
+    [[nodiscard]] size_t columns() const;
 };
 
 
