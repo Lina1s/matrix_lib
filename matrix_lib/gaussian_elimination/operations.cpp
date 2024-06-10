@@ -10,7 +10,7 @@ namespace gaussian_elimination {
         return os;
     }
 
-    Normalize::Normalize(int row, double scalar) : row(row), scalar(scalar) {
+    Normalize::Normalize(size_t row, double scalar) : row(row), scalar(scalar) {
 
     }
 
@@ -28,7 +28,7 @@ namespace gaussian_elimination {
         os << '(' << row << ") /= " << scalar;
     }
 
-    Swap::Swap(int row1, int row2) : row1(row1), row2(row2) {
+    Swap::Swap(size_t row1, size_t row2) : row1(row1), row2(row2) {
 
     }
 
@@ -44,8 +44,9 @@ namespace gaussian_elimination {
         os << '(' << row1 << ") <-> (" << row2 << ')';
     }
 
-    Subtract::Subtract(int rowSource, int rowTarget, double scalar) : row_source(rowSource), row_target(rowTarget),
-                                                                      scalar(scalar) {}
+    Subtract::Subtract(size_t rowSource, size_t rowTarget, double scalar) : row_source(rowSource),
+                                                                            row_target(rowTarget),
+                                                                            scalar(scalar) {}
 
     void Subtract::apply(Matrix &matrix) const {
         for (size_t i = 0; i < matrix.columns(); ++i) {

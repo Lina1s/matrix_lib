@@ -7,11 +7,11 @@ namespace gaussian_elimination {
         size_t min_dim = std::min(copy.rows(), copy.columns());
 
         std::vector<std::unique_ptr<GEOperation>> res{};
-        for (int i = 0; i < min_dim; ++i) {
+        for (size_t i = 0; i < min_dim; ++i) {
             bool subtract = true;
             if (copy[i][i] == 0) {  // Ставим на текущую позицию строку с ненулевым значением
                 subtract = false;
-                for (int j = i + 1; j < copy.rows(); ++j) {
+                for (size_t j = i + 1; j < copy.rows(); ++j) {
                     if (copy[j][i] != 0) {
                         subtract = true;
                         auto swap_op = std::make_unique<Swap>(i, j);
@@ -29,7 +29,7 @@ namespace gaussian_elimination {
                 res.push_back(std::move(norm_op));
             }
 
-            for (int j = 0; j < copy.rows(); ++j) { // Обнуляем столбец
+            for (size_t j = 0; j < copy.rows(); ++j) { // Обнуляем столбец
                 if (j == i) {
                     continue;
                 }

@@ -21,10 +21,10 @@ namespace gaussian_elimination {
 
     class Normalize : public GEOperation {
     private:
-        int row;
+        size_t row;
         double scalar;
     public:
-        Normalize(int row, double scalar);
+        Normalize(size_t row, double scalar);
 
         void apply(Matrix &matrix) const override;
 
@@ -35,10 +35,10 @@ namespace gaussian_elimination {
 
     class Swap : public GEOperation {
     private:
-        int row1;
-        int row2;
+        size_t row1;
+        size_t row2;
     public:
-        Swap(int row1, int row2);
+        Swap(size_t row1, size_t row2);
 
         void apply(Matrix &matrix) const override;
 
@@ -49,11 +49,11 @@ namespace gaussian_elimination {
 
     class Subtract : public GEOperation {
     private:
-        int row_source;
-        int row_target;
+        size_t row_source;
+        size_t row_target;
         double scalar;
     public:
-        Subtract(int rowSource, int rowTarget, double scalar);
+        Subtract(size_t rowSource, size_t rowTarget, double scalar);
 
         void apply(Matrix &matrix) const override;
 
