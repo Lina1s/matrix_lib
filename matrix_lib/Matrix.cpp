@@ -36,4 +36,18 @@ std::vector<double> &Matrix::operator[](int x) {
     return inner[x];
 }
 
+const std::vector<double> &Matrix::operator[](int x) const {
+    return inner[x];
+}
+
+size_t Matrix::rows() const{
+    return inner.size();
+}
+
+size_t Matrix::columns() const {
+    if (rows() == 0) {
+        return 0;
+    } return inner[0].size();
+}
+
 
