@@ -21,7 +21,21 @@ public:
     const std::vector<double> &operator[](int x) const;
     [[nodiscard]] size_t rows() const;
     [[nodiscard]] size_t columns() const;
+
+    Matrix &operator+=(const Matrix &other);
+    Matrix &operator-=(const Matrix &other);
+    Matrix &operator*=(double scalar);
+    Matrix &operator/=(double scalar);
 };
+
+Matrix operator+(const Matrix &mat);
+Matrix operator-(const Matrix &mat);
+Matrix operator+(const Matrix &lhs, const Matrix &rhs);
+Matrix operator-(const Matrix &lhs, const Matrix &rhs);
+Matrix operator*(const Matrix &lhs, double rhs);
+Matrix operator*(double lhs, const Matrix &rhs);
+Matrix operator*(const Matrix &lhs, const Matrix &rhs);
+Matrix operator/(const Matrix &lhs, double rhs);
 
 
 #endif //MATRIX_LIB_MATRIX_H
