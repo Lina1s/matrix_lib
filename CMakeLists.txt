@@ -3,6 +3,8 @@ project(matrix_lib)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(matrix_lib
+add_library(matrix_lib
         matrix_lib/Matrix.cpp
+        matrix_lib/gaussian_elimination/operations.cpp
+        matrix_lib/gaussian_elimination/elimination.cpp
 )
