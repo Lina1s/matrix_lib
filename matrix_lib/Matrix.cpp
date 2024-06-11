@@ -125,6 +125,14 @@ void transpose_inplace(Matrix &mat) {
     }
 }
 
+Matrix Matrix::identity(size_t n) {
+    std::vector<std::vector<double>> res(n, std::vector<double>(n, 0));
+    for (int i = 0; i < n; ++i) {
+        res[i][i] = 1;
+    }
+    return Matrix(res);
+}
+
 
 Matrix transpose(const Matrix &mat) {
     auto copy = mat;

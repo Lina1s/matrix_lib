@@ -91,3 +91,14 @@ Matrix nullspace(const Matrix &matrix) {
     return nullspace_from_canonical_form(copy);
 }
 
+Matrix inverse_from_operations(size_t n, const gaussian_elimination::Operations &ops) {
+    auto res = Matrix::identity(n);
+    apply_inplace(res, ops);
+    return res;
+}
+
+Matrix inverse(const Matrix &mat) {
+    gaussian_elimination::Operations ops = gaussian_elimination::eliminate(mat);
+    return inverse_from_operations(mat.rows(), ops);
+}
+

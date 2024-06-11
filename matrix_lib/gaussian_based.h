@@ -21,4 +21,8 @@ Matrix nullspace_from_canonical_form(const Matrix &canonical_form);
 
 Matrix nullspace(const Matrix &matrix);
 
+Matrix inverse_from_operations(size_t n, const gaussian_elimination::Operations &ops);
+
+Matrix inverse(const Matrix &mat);
+
 #endif //MATRIX_LIB_GAUSSIAN_BASED_H

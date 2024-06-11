@@ -40,6 +40,8 @@ public:
     Matrix &operator/=(double scalar);
 
     friend void transpose_inplace(Matrix &mat);
+
+    static Matrix identity(size_t n);
 };
 
 Matrix transpose(const Matrix &mat);
