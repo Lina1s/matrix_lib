@@ -1,6 +1,6 @@
 #include "elimination.h"
 
-namespace gaussian_elimination {
+namespace matrix_lib::gaussian_elimination {
     std::vector<std::unique_ptr<Operation>> eliminate_inplace(Matrix &mat) {
 
         std::vector<std::unique_ptr<Operation>> res{};

@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-namespace gaussian_elimination {
+namespace matrix_lib::gaussian_elimination {
     Operation::~Operation() = default;
 
     std::ostream &operator<<(std::ostream &os, const Operation &op) {

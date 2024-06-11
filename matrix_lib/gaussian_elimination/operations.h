@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-namespace gaussian_elimination {
+namespace matrix_lib::gaussian_elimination {
     class Operation {
     public:
         virtual void apply(Matrix &matrix) const = 0;

@@ -5,7 +5,7 @@
 
 #include <memory>
 
-namespace gaussian_elimination {
+namespace matrix_lib::gaussian_elimination {
     using Operations = std::vector<std::unique_ptr<Operation>>;
 
     Operations eliminate_inplace(Matrix &mat);
