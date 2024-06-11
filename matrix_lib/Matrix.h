@@ -38,7 +38,11 @@ public:
     Matrix &operator*=(double scalar);
 
     Matrix &operator/=(double scalar);
+
+    friend void transpose_inplace(Matrix &mat);
 };
+
+Matrix transpose(const Matrix &mat);
 
 Matrix operator+(const Matrix &mat);
 

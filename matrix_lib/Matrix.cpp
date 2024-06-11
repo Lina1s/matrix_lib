@@ -87,6 +87,50 @@ Matrix &Matrix::operator/=(double scalar) {
     return *this;
 }
 
+void transpose_inplace(Matrix &mat) {
+    size_t min_dim = std::min(mat.rows(), mat.columns());
+    for (size_t i = 0; i < min_dim; ++i) {
+        for (size_t j = i + 1; j < min_dim; ++j) {
+            std::swap(mat[i][j], mat[j][i]);
+        }
+    }
+
+    if (mat.rows() < mat.columns()) {
+        size_t rows = mat.rows();
+        size_t columns = mat.columns();
+        for (size_t i = 0; i < columns - rows; ++i) {
+            mat.inner.emplace_back(rows);
+        }
+
+        for (size_t i = 0; i < rows; ++i) {
+            for (size_t j = rows; j < columns; ++j) {
+                std::swap(mat[i][j], mat[j][i]);
+            }
+            mat[i].resize(rows);
+        }
+    } else if (mat.rows() > mat.columns()) {
+        size_t rows = mat.rows();
+        size_t columns = mat.columns();
+
+        for (size_t i = 0; i < columns; ++i) {
+            mat[i].resize(rows);
+        }
+
+        for (size_t i = 0; i < columns; ++i) {
+            for (size_t j = columns; j < rows; ++ j) {
+                std::swap(mat[i][j], mat[j][i]);
+            }
+        }
+        mat.inner.resize(columns);
+    }
+}
+
+
+Matrix transpose(const Matrix &mat) {
+    auto copy = mat;
+    transpose_inplace(copy);
+    return copy;
+}
 
 Matrix operator+(const Matrix &mat) {
     auto res = mat;
