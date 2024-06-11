@@ -79,6 +79,9 @@ namespace matrix_lib {
     }
 
     Matrix &Matrix::operator+=(const Matrix &other) {
+        if (rows() != other.rows() || columns() != other.columns()) {
+            throw ShapeError("Attempt to add matrices with different shapes");
+        }
         for (size_t i = 0; i < rows(); ++i) {
             for (size_t j = 0; j < columns(); ++j) {
                 inner[i][j] += other.inner[i][j];
@@ -88,6 +91,9 @@ namespace matrix_lib {
     }
 
     Matrix &Matrix::operator-=(const Matrix &other) {
+        if (rows() != other.rows() || columns() != other.columns()) {
+            throw ShapeError("Attempt to subtract matrices with different shapes");
+        }
         for (size_t i = 0; i < rows(); ++i) {
             for (size_t j = 0; j < columns(); ++j) {
                 inner[i][j] -= other.inner[i][j];
@@ -206,6 +212,9 @@ namespace matrix_lib {
     }
 
     Matrix operator*(const Matrix &lhs, const Matrix &rhs) {
+        if (lhs.columns() != rhs.rows()) {
+            throw ShapeError("Attempt to multiply matrices with incompatible shapes");
+        }
         std::vector<std::vector<double>> res(lhs.rows(), std::vector<double>(rhs.columns(), 0));
         for (int row = 0; row < lhs.rows(); ++row) {
             for (int column = 0; column < rhs.columns(); ++column) {
