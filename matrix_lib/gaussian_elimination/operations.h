@@ -6,7 +6,7 @@
 #include <iostream>
 
 namespace gaussian_elimination {
-    class GEOperation {
+    class Operation {
     public:
         virtual void apply(Matrix &matrix) const = 0;
 
@@ -14,12 +14,12 @@ namespace gaussian_elimination {
 
         virtual void print(std::ostream &os) const = 0;
 
-        virtual ~GEOperation();
+        virtual ~Operation();
 
-        friend std::ostream &operator<<(std::ostream &os, const GEOperation &op);
+        friend std::ostream &operator<<(std::ostream &os, const Operation &op);
     };
 
-    class Normalize : public GEOperation {
+    class Normalize : public Operation {
     private:
         size_t row;
         double scalar;
@@ -33,7 +33,7 @@ namespace gaussian_elimination {
         void print(std::ostream &os) const override;
     };
 
-    class Swap : public GEOperation {
+    class Swap : public Operation {
     private:
         size_t row1;
         size_t row2;
@@ -47,7 +47,7 @@ namespace gaussian_elimination {
         void print(std::ostream &os) const override;
     };
 
-    class Subtract : public GEOperation {
+    class Subtract : public Operation {
     private:
         size_t row_source;
         size_t row_target;

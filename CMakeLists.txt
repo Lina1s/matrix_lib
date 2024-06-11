@@ -7,4 +7,5 @@ add_library(matrix_lib
         matrix_lib/Matrix.cpp
         matrix_lib/gaussian_elimination/operations.cpp
         matrix_lib/gaussian_elimination/elimination.cpp
+        matrix_lib/gaussian_based.cpp
 )

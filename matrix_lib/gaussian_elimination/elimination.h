@@ -6,7 +6,10 @@
 #include <memory>
 
 namespace gaussian_elimination {
-    std::vector<std::unique_ptr<GEOperation>> eliminate(const Matrix &matrix);
+    using Operations = std::vector<std::unique_ptr<Operation>>;
+
+    Operations eliminate_inplace(Matrix &mat);
+    Operations eliminate(const Matrix &matrix);
 }
 
 #endif //MATRIX_LIB_ELIMINATION_H
