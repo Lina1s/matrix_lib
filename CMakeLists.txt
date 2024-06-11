@@ -8,4 +8,5 @@ add_library(matrix_lib
         matrix_lib/gaussian_elimination/operations.cpp
         matrix_lib/gaussian_elimination/elimination.cpp
         matrix_lib/gaussian_based.cpp
+        matrix_lib/exceptions.cpp
 )

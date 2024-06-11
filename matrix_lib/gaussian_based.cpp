@@ -1,6 +1,20 @@
 #include "gaussian_based.h"
+#include "exceptions.h"
 
 namespace matrix_lib {
+    bool is_eye(const Matrix &mat) {
+        if (mat.rows() != mat.columns()) {
+            return false;
+        }
+        for (size_t i = 0; i < mat.rows(); ++i) {
+            if (mat[i][i] != 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
     void apply_inplace(Matrix &mat, const gaussian_elimination::Operations &ops) {
         for (const auto &op: ops) {
             op->apply(mat);
@@ -14,15 +28,7 @@ namespace matrix_lib {
     }
 
     double det_from_canonical(const Matrix &canonical_form, const gaussian_elimination::Operations &ops) {
-        bool is_eye = true;
-        for (size_t i = 0; i < canonical_form.rows(); ++i) {
-            if (canonical_form[i][i] != 1) {
-                is_eye = false;
-                break;
-            }
-        }
-
-        if (!is_eye) {
+        if (!is_eye(canonical_form)) {
             return 0;
         }
 
@@ -34,6 +40,9 @@ namespace matrix_lib {
     }
 
     double det(const Matrix &matrix) {
+        if (matrix.columns() != matrix.rows()) {
+            throw ShapeError("Attempt to evaluate det of non-square matrix");
+        }
         auto copy = matrix;
         auto &&ops = gaussian_elimination::eliminate_inplace(copy);
         return det_from_canonical(copy, ops);
@@ -99,7 +108,11 @@ namespace matrix_lib {
     }
 
     Matrix inverse(const Matrix &mat) {
-        gaussian_elimination::Operations ops = gaussian_elimination::eliminate(mat);
+        auto copy = mat;
+        gaussian_elimination::Operations ops = gaussian_elimination::eliminate_inplace(copy);
+        if (!is_eye(copy)) {
+            throw InvalidOperationError("Attempt to inverse singular or non-square matrix");
+        }
         return inverse_from_operations(mat.rows(), ops);
     }
 }

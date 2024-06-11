@@ -1,18 +1,44 @@
 #include "Matrix.h"
+#include "exceptions.h"
 
 namespace matrix_lib {
+    bool Matrix::is_matrix(const std::vector<std::vector<double>> &mat) {
+        if (mat.empty()) {
+            return true;
+        }
+        size_t m = mat[0].size();
+        for (size_t i = 1; i < mat.size(); ++i) {
+            if (mat[i].size() != m) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     Matrix::Matrix(const std::vector<std::vector<double>> &mat) : inner(mat) {
+        if (!is_matrix(mat)) {
+            throw VectorError("Rows of vector have different sizes");
+        }
     }
 
     Matrix::Matrix(std::vector<std::vector<double>> &&mat) : inner(std::move(mat)) {
+        if (!is_matrix(mat)) {
+            throw VectorError("Rows of vector have different sizes");
+        }
     }
 
     Matrix &Matrix::operator=(const std::vector<std::vector<double>> &mat) {
+        if (!is_matrix(mat)) {
+            throw VectorError("Rows of vector have different sizes");
+        }
         inner = mat;
         return *this;
     }
 
     Matrix &Matrix::operator=(std::vector<std::vector<double>> &&mat) {
+        if (!is_matrix(mat)) {
+            throw VectorError("Rows of vector have different sizes");
+        }
         inner = std::move(mat);
         return *this;
 
@@ -34,11 +60,11 @@ namespace matrix_lib {
     }
 
     std::vector<double> &Matrix::operator[](size_t x) {
-        return inner[x];
+        return inner.at(x);
     }
 
     const std::vector<double> &Matrix::operator[](size_t x) const {
-        return inner[x];
+        return inner.at(x);
     }
 
     size_t Matrix::rows() const {
@@ -80,6 +106,9 @@ namespace matrix_lib {
     }
 
     Matrix &Matrix::operator/=(double scalar) {
+        if (scalar == 0) {
+            throw std::overflow_error("Attempt to divide by 0");
+        }
         for (size_t i = 0; i < rows(); ++i) {
             for (size_t j = 0; j < columns(); ++j) {
                 inner[i][j] /= scalar;
