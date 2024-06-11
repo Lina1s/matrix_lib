@@ -56,9 +56,9 @@ size_t rank(const Matrix &mat) {
     return rank_from_canonical_form(copy);
 }
 
-std::vector<std::vector<double>> nullspace_from_canonical_form(const Matrix &canonical_form, size_t rank) {
-    std::vector<std::vector<double>> res(canonical_form.columns() - rank,
-                                         std::vector<double>(canonical_form.columns(), 0));
+Matrix nullspace_from_canonical_form(const Matrix &canonical_form, size_t rank) {
+    std::vector<std::vector<double>> res(canonical_form.columns(),
+                                         std::vector<double>(canonical_form.columns() - rank, 0));
     std::vector<size_t> dependent_variables{};
     dependent_variables.reserve(rank);
 
@@ -72,20 +72,20 @@ std::vector<std::vector<double>> nullspace_from_canonical_form(const Matrix &can
         ++d;
 
         for (size_t j = 0; j < d; ++j) {
-            res[d - 1][dependent_variables[j]] = -canonical_form[j][i];
+            res[dependent_variables[j]][d - 1] = -canonical_form[j][i];
         }
-        res[d - 1][i] = 1;
+        res[i][d - 1] = 1;
     }
 
-    return res;
+    return Matrix(res);
 }
 
-std::vector<std::vector<double>> nullspace_from_canonical_form(const Matrix &canonical_form) {
+Matrix nullspace_from_canonical_form(const Matrix &canonical_form) {
     size_t rank = rank_from_canonical_form(canonical_form);
     return nullspace_from_canonical_form(canonical_form, rank);
 }
 
-std::vector<std::vector<double>> nullspace(const Matrix &matrix) {
+Matrix nullspace(const Matrix &matrix) {
     auto copy = matrix;
     gaussian_elimination::eliminate_inplace(copy);
     return nullspace_from_canonical_form(copy);

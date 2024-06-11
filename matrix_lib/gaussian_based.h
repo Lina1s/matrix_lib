@@ -15,10 +15,10 @@ size_t rank_from_canonical_form(const Matrix &canonical_form);
 
 size_t rank(const Matrix &mat);
 
-std::vector<std::vector<double>> nullspace_from_canonical_form(const Matrix &canonical_form, size_t rank);
+Matrix nullspace_from_canonical_form(const Matrix &canonical_form, size_t rank);
 
-std::vector<std::vector<double>> nullspace_from_canonical_form(const Matrix &canonical_form);
+Matrix nullspace_from_canonical_form(const Matrix &canonical_form);
 
-std::vector<std::vector<double>> nullspace(const Matrix &matrix);
+Matrix nullspace(const Matrix &matrix);
 
 #endif //MATRIX_LIB_GAUSSIAN_BASED_H
