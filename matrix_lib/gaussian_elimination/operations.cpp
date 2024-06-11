@@ -3,9 +3,9 @@
 #include <cmath>
 
 namespace gaussian_elimination {
-    GEOperation::~GEOperation() = default;
+    Operation::~Operation() = default;
 
-    std::ostream &operator<<(std::ostream &os, const GEOperation &op) {
+    std::ostream &operator<<(std::ostream &os, const Operation &op) {
         op.print(os);
         return os;
     }
