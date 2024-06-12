@@ -32,8 +32,6 @@ namespace matrix_lib::gaussian_elimination {
          * @brief Вывод строкового представления в поток
          * @param os Поток вывода
          */
-        virtual void print(std::ostream &os) const = 0;
-
         virtual ~Operation();
 
         friend std::wostream &operator<<(std::wostream &, const Operation &op);

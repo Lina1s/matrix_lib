@@ -7,9 +7,8 @@ namespace matrix_lib::gaussian_elimination {
     /// @headerfile operations.h
     Operation::~Operation() = default;
 
-    std::wostream &operator<<(std::wostream &os, const Operation &op) {
     /// @headerfile operations.h
-    std::ostream &operator<<(std::ostream &os, const Operation &op) {
+    std::wostream &operator<<(std::wostream &os, const Operation &op) {
         op.print(os);
         return os;
     }
@@ -31,11 +30,9 @@ namespace matrix_lib::gaussian_elimination {
         return scalar;
     }
 
+    /// @headerfile operations.h
     void Normalize::print(std::wostream &os) const {
         os << L'(' << row << L") /= " << scalar;
-    /// @headerfile operations.h
-    void Normalize::print(std::ostream &os) const {
-        os << '(' << row << ") /= " << scalar;
     }
 
     /// @headerfile operations.h
@@ -54,8 +51,6 @@ namespace matrix_lib::gaussian_elimination {
     }
 
     /// @headerfile operations.h
-    void Swap::print(std::ostream &os) const {
-        os << '(' << row1 << ") <-> (" << row2 << ')';
     void Swap::print(std::wostream &os) const {
         os << L'(' << row1 << L") <-> (" << row2 << L')';
     }
@@ -78,8 +73,6 @@ namespace matrix_lib::gaussian_elimination {
     }
 
     /// @headerfile operations.h
-    void Subtract::print(std::ostream &os) const {
-        os << '(' << row_target << ") -= " << scalar << " * (" << row_source << ')';
     void Subtract::print(std::wostream &os) const {
         os << L'(' << row_target << L") -= " << scalar << L" * (" << row_source << L')';
     }
