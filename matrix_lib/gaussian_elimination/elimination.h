@@ -22,8 +22,6 @@ namespace matrix_lib::gaussian_elimination {
      * @return Список операций метода Гаусса
      */
     Operations eliminate_inplace(Matrix &mat);
-
-    Operations eliminate(const Matrix &matrix);
 }
 
 #endif //MATRIX_LIB_ELIMINATION_H
