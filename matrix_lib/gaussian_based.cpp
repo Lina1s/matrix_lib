@@ -122,10 +122,13 @@ namespace matrix_lib {
 
     /// @headerfile gaussian_based.h
     Matrix inverse(const Matrix &mat) {
+        if (mat.rows() != mat.columns()) {
+            throw ShapeError("Attempt to inverse non-square matrix");
+        }
         auto copy = mat;
         gaussian_elimination::Operations ops = gaussian_elimination::eliminate_inplace(copy);
         if (!is_eye(copy)) {
-            throw InvalidOperationError("Attempt to inverse singular or non-square matrix");
+            throw InvalidOperationError("Attempt to inverse singular matrix");
         }
         return inverse_from_operations(mat.rows(), ops);
     }

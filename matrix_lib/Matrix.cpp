@@ -16,6 +16,11 @@ namespace matrix_lib {
         }
         return true;
     }
+
+    /// @headerfile Matrix.h
+    Matrix::Matrix(): Matrix({}) {
+    }
+
     /// @headerfile Matrix.h
     Matrix::Matrix(const std::vector<std::vector<double>> &mat) : inner(mat) {
         if (!is_matrix(mat)) {
@@ -189,6 +194,16 @@ namespace matrix_lib {
     }
 
     Matrix::Matrix(std::initializer_list<std::vector<double>> rows) : Matrix(std::vector(rows)) {
+    }
+
+    /// @headerfile Matrix.h
+    bool Matrix::operator==(const Matrix &other) const {
+        return inner == other.inner;
+    }
+
+    /// @headerfile Matrix.h
+    bool Matrix::operator!=(const Matrix &other) const {
+        return inner != other.inner;
     }
 
 

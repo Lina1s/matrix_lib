@@ -1,6 +1,15 @@
 ///@cond
 #include "elimination.h"
 ///@endcond
+
+static double rnd(double val) {
+    static double prec = 1e-7;
+    if (std::abs(val) < prec) {
+        return 0;
+    }
+    return val;
+}
+
 namespace matrix_lib::gaussian_elimination {
     /// @headerfile elimination.h
     std::vector<std::unique_ptr<Operation>> eliminate_inplace(Matrix &mat) {
@@ -10,6 +19,9 @@ namespace matrix_lib::gaussian_elimination {
         for (size_t i = 0; i < mat.columns(); ++i) {
             bool subtract = true;
             size_t row = i - d;
+            if (row >= mat.rows()) {
+                break;
+            }
             if (mat[row][i] == 0) {  // Ставим на текущую позицию строку с ненулевым значением
                 subtract = false;
                 for (size_t j = row + 1; j < mat.rows(); ++j) {
@@ -25,10 +37,12 @@ namespace matrix_lib::gaussian_elimination {
                 ++d;
                 continue;
             }
-            if (mat[row][i] != 1) {  // Опорные значения должны быть единицами
+            if (rnd(mat[row][i] - 1) != 0) {  // Опорные значения должны быть единицами
                 auto norm_op = std::make_unique<Normalize>(row, mat[row][i]);
                 norm_op->apply(mat);
                 res.push_back(std::move(norm_op));
+            } else {
+                mat[row][i] = 1;
             }
 
             for (size_t j = 0; j < mat.rows(); ++j) { // Обнуляем столбец

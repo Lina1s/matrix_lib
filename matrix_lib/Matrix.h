@@ -17,6 +17,11 @@ namespace matrix_lib {
 
     public:
         /**
+         * @brief Конструктор по умолчанию
+         * @details Создает пустую матрицу
+         */
+        Matrix();
+        /**
          * @name Конструкторы на основе векторов
          * @details
          * Конструкторы, позволяющие представить двумерный вектор double в виде матрицы.
@@ -119,6 +124,16 @@ namespace matrix_lib {
          * @return Единичную матрицу размера n @f$\times@f$ n
          */
         static Matrix identity(size_t n);
+
+        /**
+         * @brief Сравнение матриц на равенство
+         * @details Поэлементно проверяет матрицы на равенство
+         * @param other Матрица, с которой нужно сравнить this
+         */
+         ///@{
+        bool operator==(const Matrix &other) const;
+        bool operator!=(const Matrix &other) const;
+        ///@}
     };
 
     /**
