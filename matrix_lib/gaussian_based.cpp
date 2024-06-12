@@ -2,6 +2,7 @@
 #include "exceptions.h"
 
 namespace matrix_lib {
+    ///@cond
     bool is_eye(const Matrix &mat) {
         if (mat.rows() != mat.columns()) {
             return false;
@@ -13,7 +14,7 @@ namespace matrix_lib {
         }
         return true;
     }
-
+    ///@endcond
 
     void apply_inplace(Matrix &mat, const gaussian_elimination::Operations &ops) {
         for (const auto &op: ops) {
