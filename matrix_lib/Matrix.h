@@ -7,11 +7,15 @@ namespace matrix_lib {
     class Matrix {
     private:
         std::vector<std::vector<double>> inner;
+
         static bool is_matrix(const std::vector<std::vector<double>> &mat);
+
     public:
         explicit Matrix(const std::vector<std::vector<double>> &mat);
 
         explicit Matrix(std::vector<std::vector<double>> &&mat);
+
+        Matrix(std::initializer_list<std::vector<double>> rows);
 
         Matrix &operator=(const std::vector<std::vector<double>> &mat);
 

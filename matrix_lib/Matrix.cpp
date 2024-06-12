@@ -163,6 +163,9 @@ namespace matrix_lib {
         return Matrix(res);
     }
 
+    Matrix::Matrix(std::initializer_list<std::vector<double>> rows) : Matrix(std::vector(rows)) {
+    }
+
 
     Matrix transpose(const Matrix &mat) {
         auto copy = mat;

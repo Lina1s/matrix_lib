@@ -2,6 +2,7 @@
 #define MATRIX_LIB_GAUSSIAN_BASED_H
 
 #include "gaussian_elimination/elimination.h"
+
 namespace matrix_lib {
     void apply_inplace(Matrix &mat, const gaussian_elimination::Operations &ops);
 

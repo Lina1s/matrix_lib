@@ -9,6 +9,7 @@ namespace matrix_lib::gaussian_elimination {
     using Operations = std::vector<std::unique_ptr<Operation>>;
 
     Operations eliminate_inplace(Matrix &mat);
+
     Operations eliminate(const Matrix &matrix);
 }
 
