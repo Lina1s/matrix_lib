@@ -32,6 +32,10 @@ add_executable(tests
         tests/test_mul.cpp
         tests/test_minus.cpp
         tests/test_transpose.cpp
+        tests/test_rank.cpp
+        tests/test_det.cpp
+        tests/test_inv.cpp
+        tests/test_nullspace.cpp
 )
 target_link_libraries(tests GTest::gtest_main matrix_lib)
 include(GoogleTest)

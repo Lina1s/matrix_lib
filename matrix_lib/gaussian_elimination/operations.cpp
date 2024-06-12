@@ -3,6 +3,15 @@
 
 #include <cmath>
 ///@endcond
+
+static double rnd(double val) {
+    static double prec = 1e-7;
+    if (std::abs(val) < prec) {
+        return 0;
+    }
+    return val;
+}
+
 namespace matrix_lib::gaussian_elimination {
     /// @headerfile operations.h
     Operation::~Operation() = default;
@@ -22,6 +31,7 @@ namespace matrix_lib::gaussian_elimination {
     void Normalize::apply(Matrix &matrix) const {
         for (auto &el: matrix[row]) {
             el /= scalar;
+            el = rnd(el);
         }
     }
 
@@ -64,6 +74,7 @@ namespace matrix_lib::gaussian_elimination {
     void Subtract::apply(Matrix &matrix) const {
         for (size_t i = 0; i < matrix.columns(); ++i) {
             matrix[row_target][i] -= scalar * matrix[row_source][i];
+            matrix[row_target][i] = rnd(matrix[row_target][i]);
         }
     }
 
