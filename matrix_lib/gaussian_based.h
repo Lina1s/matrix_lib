@@ -2,6 +2,7 @@
 #define MATRIX_LIB_GAUSSIAN_BASED_H
 ///@cond
 #include "gaussian_elimination/elimination.h"
+
 ///@endcond
 namespace matrix_lib {
     /**

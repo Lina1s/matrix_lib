@@ -27,6 +27,7 @@ namespace matrix_lib::gaussian_elimination {
          */
         [[nodiscard]] virtual double det_coefficient() const = 0;
 
+        virtual void print(std::wostream &os) const = 0;
         /**
          * @brief Вывод строкового представления в поток
          * @param os Поток вывода
@@ -35,7 +36,7 @@ namespace matrix_lib::gaussian_elimination {
 
         virtual ~Operation();
 
-        friend std::ostream &operator<<(std::ostream &os, const Operation &op);
+        friend std::wostream &operator<<(std::wostream &, const Operation &op);
     };
 
     /**
@@ -57,7 +58,7 @@ namespace matrix_lib::gaussian_elimination {
 
         [[nodiscard]] double det_coefficient() const override;
 
-        void print(std::ostream &os) const override;
+        void print(std::wostream &os) const override;
     };
 
     /**
@@ -78,7 +79,7 @@ namespace matrix_lib::gaussian_elimination {
 
         [[nodiscard]] double det_coefficient() const override;
 
-        void print(std::ostream &os) const override;
+        void print(std::wostream &os) const override;
     };
 
     /**
@@ -101,7 +102,7 @@ namespace matrix_lib::gaussian_elimination {
 
         [[nodiscard]] double det_coefficient() const override;
 
-        void print(std::ostream &os) const override;
+        void print(std::wostream &os) const override;
     };
 }
 
