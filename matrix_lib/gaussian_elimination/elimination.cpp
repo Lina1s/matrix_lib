@@ -1,6 +1,8 @@
+///@cond
 #include "elimination.h"
-
+///@endcond
 namespace matrix_lib::gaussian_elimination {
+    /// @headerfile elimination.h
     std::vector<std::unique_ptr<Operation>> eliminate_inplace(Matrix &mat) {
 
         std::vector<std::unique_ptr<Operation>> res{};
@@ -23,7 +25,7 @@ namespace matrix_lib::gaussian_elimination {
                 ++d;
                 continue;
             }
-            if (mat[row][i] != 1) {  // Опорные значения должны быть едницами
+            if (mat[row][i] != 1) {  // Опорные значения должны быть единицами
                 auto norm_op = std::make_unique<Normalize>(row, mat[row][i]);
                 norm_op->apply(mat);
                 res.push_back(std::move(norm_op));
@@ -43,9 +45,6 @@ namespace matrix_lib::gaussian_elimination {
 
         return res;
     }
-
-    std::vector<std::unique_ptr<Operation>> eliminate(const Matrix &matrix) {
-        auto copy = matrix;
-        return eliminate_inplace(copy);
-    }
 }
+
+/// @file

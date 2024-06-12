@@ -1,6 +1,7 @@
+///@cond
 #include "gaussian_based.h"
 #include "exceptions.h"
-
+///@endcond
 namespace matrix_lib {
     ///@cond
     bool is_eye(const Matrix &mat) {
@@ -16,18 +17,22 @@ namespace matrix_lib {
     }
     ///@endcond
 
+
+    /// @headerfile gaussian_based.h
     void apply_inplace(Matrix &mat, const gaussian_elimination::Operations &ops) {
         for (const auto &op: ops) {
             op->apply(mat);
         }
     }
 
+    /// @headerfile gaussian_based.h
     Matrix apply(const Matrix &mat, const gaussian_elimination::Operations &ops) {
         auto copy = mat;
         apply_inplace(copy, ops);
         return copy;
     }
 
+    /// @headerfile gaussian_based.h
     double det_from_canonical(const Matrix &canonical_form, const gaussian_elimination::Operations &ops) {
         if (!is_eye(canonical_form)) {
             return 0;
@@ -40,6 +45,7 @@ namespace matrix_lib {
         return res;
     }
 
+    /// @headerfile gaussian_based.h
     double det(const Matrix &matrix) {
         if (matrix.columns() != matrix.rows()) {
             throw ShapeError("Attempt to evaluate det of non-square matrix");
@@ -49,6 +55,7 @@ namespace matrix_lib {
         return det_from_canonical(copy, ops);
     }
 
+    /// @headerfile gaussian_based.h
     size_t rank_from_canonical_form(const Matrix &canonical_form) {
         for (size_t i = canonical_form.rows(); i > 0; --i) {
             size_t row = i - 1;
@@ -61,12 +68,14 @@ namespace matrix_lib {
         return 0;
     }
 
+    /// @headerfile gaussian_based.h
     size_t rank(const Matrix &mat) {
         auto copy = mat;
         gaussian_elimination::eliminate_inplace(copy);
         return rank_from_canonical_form(copy);
     }
 
+    /// @headerfile gaussian_based.h
     Matrix nullspace_from_canonical_form(const Matrix &canonical_form, size_t rank) {
         std::vector<std::vector<double>> res(canonical_form.columns(),
                                              std::vector<double>(canonical_form.columns() - rank, 0));
@@ -91,23 +100,27 @@ namespace matrix_lib {
         return Matrix(res);
     }
 
+    /// @headerfile gaussian_based.h
     Matrix nullspace_from_canonical_form(const Matrix &canonical_form) {
         size_t rank = rank_from_canonical_form(canonical_form);
         return nullspace_from_canonical_form(canonical_form, rank);
     }
 
+    /// @headerfile gaussian_based.h
     Matrix nullspace(const Matrix &matrix) {
         auto copy = matrix;
         gaussian_elimination::eliminate_inplace(copy);
         return nullspace_from_canonical_form(copy);
     }
 
+    /// @headerfile gaussian_based.h
     Matrix inverse_from_operations(size_t n, const gaussian_elimination::Operations &ops) {
         auto res = Matrix::identity(n);
         apply_inplace(res, ops);
         return res;
     }
 
+    /// @headerfile gaussian_based.h
     Matrix inverse(const Matrix &mat) {
         auto copy = mat;
         gaussian_elimination::Operations ops = gaussian_elimination::eliminate_inplace(copy);
@@ -118,3 +131,4 @@ namespace matrix_lib {
     }
 }
 
+///@file
