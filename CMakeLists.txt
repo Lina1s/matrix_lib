@@ -10,3 +10,6 @@ add_library(matrix_lib
         matrix_lib/gaussian_based.cpp
         matrix_lib/exceptions.cpp
 )
+
+add_executable(console_application console_application.cpp)
+target_link_libraries(console_application matrix_lib)

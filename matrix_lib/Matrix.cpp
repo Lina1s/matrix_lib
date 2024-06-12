@@ -188,6 +188,9 @@ namespace matrix_lib {
         return Matrix(res);
     }
 
+    Matrix::Matrix(std::initializer_list<std::vector<double>> rows) : Matrix(std::vector(rows)) {
+    }
+
 
     /// @headerfile Matrix.h
     Matrix transpose(const Matrix &mat) {

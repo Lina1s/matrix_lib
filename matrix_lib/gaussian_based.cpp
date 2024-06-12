@@ -91,7 +91,7 @@ namespace matrix_lib {
             }
             ++d;
 
-            for (size_t j = 0; j < d; ++j) {
+            for (size_t j = 0; j < dependent_variables.size(); ++j) {
                 res[dependent_variables[j]][d - 1] = -canonical_form[j][i];
             }
             res[i][d - 1] = 1;
